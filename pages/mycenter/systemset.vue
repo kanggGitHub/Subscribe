@@ -2,60 +2,38 @@
 	<view>
 		<cu-custom bgColor="bg-gradual-pink" :isBack="true">
 			<block slot="backText">返回</block>
-			<block slot="content">问题和意见</block>
+			<block slot="content">系统设置</block>
 		</cu-custom>
+		<view class="bg-white">
+			<view class="flex solid-bottom padding justify-center">
+			<view class="cu-avatar xl round margin-left" style="background-image:url(static/guide/logo.png);"></view>
+			</view>
+		</view>
+		<view class="cu-bar bg-white solid-bottom margin-top">
+			<view class="action">
+				<text class="cuIcon-title text-orange "></text> 设置
+			</view>
+		</view>
+		
 		<scroll-view :scroll-y="modalName==null" class="page" :class="modalName!=null?'show':''">
-			<!-- <view class="cu-bar bg-white solid-bottom margin-top">
-				<view class="action">
-					<text class="cuIcon-title text-orange"></text> 自定义
-				</view>
-				<view class="action">
-					<button class="cu-btn bg-green shadow" @tap="showModal" data-target="menuModal">设置</button>
-				</view>
-			</view> -->
-			<!-- <view class="cu-modal" :class="modalName=='menuModal'?'show':''" @tap="hideModal">
-				<view class="cu-dialog" @tap.stop>
-					<view class="cu-list menu text-left solid-top">
-						<view class="cu-item">
-							<view class="content">
-								<text class="text-grey">箭头</text>
-							</view>
-							<view class="action">
-								<switch @change="MenuArrow" :class="menuArrow?'checked':''" :checked="menuArrow?true:false"></switch>
-							</view>
+			<view class="cu-list menu" :class="'card-menu margin-top'">
+				<view class="cu-list menu" :class="'sm-border'">
+					<view class="cu-item" :class="''">
+						<view class="content" @click="onCache()" >
+							<image src="/static/system/cache.png"  class="png" mode="aspectFit"></image>
+							<text class="text-grey" >清除缓存</text>
 						</view>
-						<view class="cu-item">
-							<view class="content">
-								<text class="text-grey">卡片</text>
-							</view>
-							<view class="action">
-								<switch @change="MenuCard" :class="menuCard?'checked':''" :checked="menuCard?true:false"></switch>
-							</view>
+					</view>
+					<view class="cu-item" :class="''">
+						<view class="content" hover-class="none" >
+							<image src="/static/center/sign_ct.png"  class="png" mode="aspectFit"></image>
+							<text class="text-grey" >版本更新</text>
 						</view>
 					</view>
 				</view>
-			</view> -->
-			<view class="cu-list menu" :class="'sm-border'">
-				<view class="cu-item" :class="''">
-					<view class="content" @click="onCache()" >
-						<image src="/static/system/cache.png"  class="png" mode="aspectFit"></image>
-						<text class="text-grey" >清除缓存</text>
-					</view>
-				</view>
-				<view class="cu-item" :class="''">
-					<navigator class="content" hover-class="none" url="../mycenter/clockin" >
-						<image src="/static/center/sign_ct.png"  class="png" mode="aspectFit"></image>
-						<text class="text-grey" >签到</text>
-					</navigator>
-				</view>
-				
 			</view>
 
-			<view class="cu-bar bg-white solid-bottom margin-top">
-				<view class="action">
-					<text class="cuIcon-title text-orange "></text> 消息列表
-				</view>
-			</view>
+			
 			
 			
 
@@ -93,25 +71,6 @@
 					})
 				}
 			});
-			},
-			// ListTouch触摸开始
-			ListTouchStart(e) {
-				this.listTouchStart = e.touches[0].pageX
-			},
-
-			// ListTouch计算方向
-			ListTouchMove(e) {
-				this.listTouchDirection = e.touches[0].pageX - this.listTouchStart > 0 ? 'right' : 'left'
-			},
-
-			// ListTouch计算滚动
-			ListTouchEnd(e) {
-				if (this.listTouchDirection == 'left') {
-					this.modalName = e.currentTarget.dataset.target
-				} else {
-					this.modalName = null
-				}
-				this.listTouchDirection = null
 			}
 		}
 	}
