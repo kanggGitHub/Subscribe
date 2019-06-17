@@ -33,11 +33,12 @@
         <calendar 
         :date="date"
         :lunar="true" 
-        :disable-before="true" 
-        :start-date="'2019-3-2'"
+        :disable-before="false" 
+        :start-date="'2017-3-2'"
         :end-date="'2230-5-20'"
         @change="change"
         @to-click="toClick"
+		 theme="#fffff"
          ></calendar>
 
     </view>
@@ -54,7 +55,7 @@ export default {
     },
     data() {
         return {
-            date:'2019-03-15',
+            date:new Date(),
 			isCard: false,
 			signdate:30
         };

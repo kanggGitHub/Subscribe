@@ -129,13 +129,13 @@
 				this.swiperList = list
 			},
 			addPhoto(){
-				let addPhotos = {
-						title: '按钮',
-						name: 'button',
-						color: 'pink',
-						cuIcon: 'btn'
-					},
-				this.elements.push(addPhotos),
+				// let addPhotos = {
+				// 		title: '按钮',
+				// 		name: 'button',
+				// 		color: 'pink',
+				// 		cuIcon: 'btn'
+				// 	},
+				// this.elements.push(addPhotos),
 				uni.showToast({
 					title:"创建成功"
 				})
