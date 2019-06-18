@@ -25,7 +25,7 @@
 						</view>
 					</view>
 					<view class="cu-item" :class="''">
-						<view class="content" hover-class="none" >
+						<view class="content" hover-class="none"  @click="VersionUpdate()"  >
 							<image src="/static/center/sign_ct.png"  class="png" mode="aspectFit"></image>
 							<text class="text-grey" >版本更新</text>
 						</view>
@@ -58,14 +58,24 @@
 			},
 			onCache(){
 				uni.removeStorage({
-				key: 'ifLaunch',
-				success: function (res) {
-					uni.showToast({
-						title:"清除本地缓存成功！",
-						icon:"success"
-					})
-				}
-			});
+					key: 'ifLaunch',
+					success: function (res) {
+						uni.showToast({
+							title:"清除本地缓存成功！",
+							icon:"success"
+						})
+					}
+				});
+			},
+			VersionUpdate(){
+				uni.removeStorage({
+					key: 'ifLaunch',
+					success: function (res) {
+						uni.showToast({
+							title:"已是最新版本",
+						})
+					}
+				});
 			}
 		}
 	}

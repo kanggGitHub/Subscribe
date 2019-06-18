@@ -7,7 +7,7 @@
 
 <script>
   import waterfalltemp from '../../components/kcy-waterfall/waterfalltemp.vue'
-  import dataList from '../../static/kcy-waterfall/data.json'
+  import dataList from '../../static/datajson/waterdata.json'
 	export default {
     components: {
       waterfalltemp
@@ -90,9 +90,8 @@
 			}
 		},
 		onLoad() {
-			console.log(this.list)
-        //this.list = dataList
-      
+			console.log(2222);
+			// 初始化towerSwiper 传已有的数组名即可
 		},
 		methods: {}
 	}

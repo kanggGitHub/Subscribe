@@ -1,6 +1,6 @@
 <template name="basics">
 	<view>
-		
+		<!-- 轮播图 -->
 		<scroll-view scroll-y class="page">
 			<swiper class="card-swiper" :class="dotStyle?'square-dot':'round-dot'" :indicator-dots="true" :circular="true"
 			 :autoplay="true" interval="2000" duration="500" @change="cardSwiper" indicator-color="#8799a3"
@@ -22,7 +22,7 @@
 				</view>
 			</view>
 			<!-- 相册 -->
-			<view  v-if="elements==''"  class="nav-list">
+			<view  v-if="showtap==1"  class="nav-list">
 				<navigator hover-class="none" :url="'/pages/basics/' + item.name" class="nav-li" navigateTo :class="'bg-'+item.color"
 				 :style="[{animation: 'show ' + ((index+1)*0.2+1) + 's 1'}]" v-for="(item,index) in elements" :key="index">
 					<view class="nav-title">{{item.title}}</view>
@@ -30,7 +30,7 @@
 					<text :class="'cuIcon-' + item.cuIcon"></text>
 				</navigator>
 			</view>
-			<view v-else>
+			<view v-else-if="showtap==2">
 				<view class="margin radius bg-gradual-green shadow-blur">
 					<image src="https://image.weilanwl.com/gif/wave.gif" mode="scaleToFill" class="gif-black response" style="height:100upx"></image>
 				</view>
@@ -44,7 +44,7 @@
 					<form>
 						<view class="cu-form-group margin-top">
 							<view class="title">名称</view>
-							<input placeholder="例如:我的相册" v-model="addphoto.title" name="input"></input>
+							<input placeholder="例如:我的相册"  v-model="addphoto.title" name="input"></input>
 						</view>
 						<view class="cu-form-group">
 							<view class="title">名称</view>
@@ -52,75 +52,52 @@
 						</view>
 						<view class="cu-form-group margin-top">
 							<view class="title">颜色</view>
-							<input placeholder="例如:red" v-model="addphoto.color" name="input"></input>
+							<input placeholder="例如:red,默认青蓝色" v-model="addphoto.color" name="input"></input>
 						</view>
 						<button class="cu-btn bg-cyan " @click="addPhoto()">创建相册</button>
 					</form>
 				</view>
 			</view>
-			
-			
 		</scroll-view>
 	</view>
 </template>
 
 <script>
+	import swiperjson from "../../static/datajson/swiperJson.json"
 	export default {
 		name: "basics",
 		data() {
 			return {
 				cardCur: 0,
-				dotStyle:false,
+				showtap:0,
+				dotStyle:true,
 				modalName: null,
-				swiperList: [{
-					id: 0,
-					type: 'image',
-					url: 'https://ossweb-img.qq.com/images/lol/web201310/skin/big84000.jpg'
-				}, {
-					id: 1,
-					type: 'image',
-					url: 'https://ossweb-img.qq.com/images/lol/web201310/skin/big37006.jpg',
-				}, {
-					id: 2,
-					type: 'image',
-					url: 'https://ossweb-img.qq.com/images/lol/web201310/skin/big39000.jpg'
-				}, {
-					id: 3,
-					type: 'image',
-					url: 'https://ossweb-img.qq.com/images/lol/web201310/skin/big10001.jpg'
-				}, {
-					id: 4,
-					type: 'image',
-					url: 'https://ossweb-img.qq.com/images/lol/web201310/skin/big25011.jpg'
-				}, {
-					id: 5,
-					type: 'image',
-					url: 'https://ossweb-img.qq.com/images/lol/web201310/skin/big21016.jpg'
-				}],
-				elements: [{
-						title: '布局',
-						name: 'layout',
-						color: 'cyan',
-						cuIcon: 'newsfill'
-					},
-					{
-						title: '背景',
-						name: 'background',
-						color: 'blue',
-						cuIcon: 'colorlens'
-					},
-					{
-						title: '文本',
-						name: 'text',
-						color: 'purple',
-						cuIcon: 'font'
-					},
-					{
-						title: '图标 ',
-						name: 'icon',
-						color: 'mauve',
-						cuIcon: 'cuIcon'
-					}
+				swiperList: [],
+				elements: [
+					// {
+					// 	title: '布局',
+					// 	name: 'layout',
+					// 	color: 'cyan',
+					// 	cuIcon: 'newsfill'
+					// },
+					// {
+					// 	title: '背景',
+					// 	name: 'background',
+					// 	color: 'blue',
+					// 	cuIcon: 'colorlens'
+					// },
+					// {
+					// 	title: '文本',
+					// 	name: 'text',
+					// 	color: 'purple',
+					// 	cuIcon: 'font'
+					// },
+					// {
+					// 	title: '图标 ',
+					// 	name: 'icon',
+					// 	color: 'mauve',
+					// 	cuIcon: 'cuIcon'
+					// }
 				],
 				addphoto:{
 					title:'',
@@ -131,44 +108,80 @@
 			};
 		},
 		onShow() {
-			console.log("success")
 		},
-		onLoad() {
-			this.TowerSwiper('swiperList');
-			// 初始化towerSwiper 传已有的数组名即可
+		created() {
+			//初始化轮播图 相册列表
+			let that = this
+			that.getPhotos()
+			that.getSwiperList()
 		},
 		methods: {
-			DotStyle(e) {
-				this.dotStyle = e.detail.value
-			},
 			// cardSwiper
 			cardSwiper(e) {
 				this.cardCur = e.detail.current
 			},
-			// towerSwiper
-			// 初始化towerSwiper
-			TowerSwiper(name) {
-				let list = this[name];
-				for (let i = 0; i < list.length; i++) {
-					list[i].zIndex = parseInt(list.length / 2) + 1 - Math.abs(i - parseInt(list.length / 2))
-					list[i].mLeft = i - parseInt(list.length / 2)
-				}
-				this.swiperList = list
-			},
+			//创建相册
 			addPhoto(){
 				this.elements.push({title:this.addphoto.title,
 									name:this.addphoto.name,
 									color:this.addphoto.color==''?'cyan':this.addphoto.color,
 									cuIcon:this.addphoto.cuIcon})
 				this.modalName=null
+				this.showtap=1
 				uni.showToast({
 					title:"创建成功"
 				})
-				
 			},
+			//初始化相册
+			getPhotos(){
+				let that = this
+				uni.request({
+					url: 'http://localhost:8088/photo/getPhotoList', //请求后台接口返回数据。
+					method:'GET',
+					header: {
+						'content-type': 'application/json' //自定义请求头信息
+					},
+					success: (res) => {
+						if(res.data!=null&&res.data.length>0){
+							that.elements = res.data
+							that.showtap=1
+						}else{
+							that.showtap=2
+						}
+					},
+					fail() {
+						that.showtap=2
+					}
+				});
+			},
+			
+			//初始化轮播图
+			getSwiperList(){
+				let that = this
+				uni.request({
+					url: 'http://localhost:8088/photo/getSwiperList', //请求后台接口返回数据。
+					method:'GET',
+					header: {
+						'content-type': 'application/json' //自定义请求头信息
+					},
+					success: (res) => { //成功
+						if(res.data!=null){
+							that.swiperList = res.data
+						}
+						if(that.swiperList.length=0)
+							that.swiperList=swiperjson
+							
+					},
+					fail() { //失败
+						that.swiperList=swiperjson
+					}
+				});
+			},
+			//显示创建页面
 			showModal(e) {
 				this.modalName = e.currentTarget.dataset.target
 			},
+			//隐藏
 			hideModal(e) {
 				this.modalName = null
 			},
