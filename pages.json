@@ -28,6 +28,10 @@
             "path" : "pages/mycenter/systemset",
             "style" : {}
         }
+		,{
+		    "path" : "pages/mycenter/aboutus",
+		    "style" : {}
+		}
     ],
 	// "globalStyle": {
 	// 	"navigationBarTextStyle": "black",
