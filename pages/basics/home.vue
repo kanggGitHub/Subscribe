@@ -135,47 +135,49 @@
 			//初始化相册
 			getPhotos(){
 				let that = this
-				uni.request({
-					url: 'http://localhost:8088/photo/getPhotoList', //请求后台接口返回数据。
-					method:'GET',
-					header: {
-						'content-type': 'application/json' //自定义请求头信息
-					},
-					success: (res) => {
-						if(res.data!=null&&res.data.length>0){
-							that.elements = res.data
-							that.showtap=1
-						}else{
-							that.showtap=2
-						}
-					},
-					fail() {
-						that.showtap=2
-					}
-				});
+				that.showtap=2
+				// uni.request({
+				// 	url: 'http://localhost:8088/photo/getPhotoList', //请求后台接口返回数据。
+				// 	method:'GET',
+				// 	header: {
+				// 		'content-type': 'application/json' //自定义请求头信息
+				// 	},
+				// 	success: (res) => {
+				// 		if(res.data!=null&&res.data.length>0){
+				// 			that.elements = res.data
+				// 			that.showtap=1
+				// 		}else{
+				// 			that.showtap=2
+				// 		}
+				// 	},
+				// 	fail() {
+				// 		that.showtap=2
+				// 	}
+				// });
 			},
 			
 			//初始化轮播图
 			getSwiperList(){
 				let that = this
-				uni.request({
-					url: 'http://localhost:8088/photo/getSwiperList', //请求后台接口返回数据。
-					method:'GET',
-					header: {
-						'content-type': 'application/json' //自定义请求头信息
-					},
-					success: (res) => { //成功
-						if(res.data!=null){
-							that.swiperList = res.data
-						}
-						if(that.swiperList.length=0)
-							that.swiperList=swiperjson
-							
-					},
-					fail() { //失败
-						that.swiperList=swiperjson
-					}
-				});
+				that.swiperList=swiperjson
+				// uni.request({
+				// 	url: 'http://localhost:8088/photo/getSwiperList', //请求后台接口返回数据。
+				// 	method:'GET',
+				// 	header: {
+				// 		'content-type': 'application/json' //自定义请求头信息
+				// 	},
+				// 	success: (res) => { //成功
+				// 		if(res.data!=null){
+				// 			that.swiperList = res.data
+				// 		}
+				// 		if(that.swiperList.length=0)
+				// 			that.swiperList=swiperjson
+				// 			
+				// 	},
+				// 	fail() { //失败
+				// 		that.swiperList=swiperjson
+				// 	}
+				// });
 			},
 			//显示创建页面
 			showModal(e) {
