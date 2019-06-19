@@ -1,6 +1,6 @@
 <template name="mycenter">
 	<view>
-		<view class="bg-gradual-purple">
+		<!-- <view class="bg-gradual-purple">
 			<view class="flex solid-bottom padding align-center">
 				<view class="cu-avatar xl round " style="background-image:url(https://ossweb-img.qq.com/images/lol/web201310/skin/big99008.jpg);height: 200upx;width: 200upx;"></view>
 				<view class="bg-gradual-purple padding-sm margin-xs radius" style="font-size: 30upx;">{{pickername}}
@@ -8,7 +8,17 @@
 				</view>
 				
 			</view>
-		</view>
+		</view> -->
+		 <view class="UCenter-bg">
+					<image src="../../static/guide/logo.png" class="png" mode="widthFix"></image>
+					<view class="text-xl">{{pickername}}
+					  <text class="text-df">0.2</text>
+					</view>
+					<view class="margin-top-sm">
+					  <text>By:李馥含</text>
+					</view>
+					<image src="https://image.weilanwl.com/gif/wave.gif" mode="scaleToFill" class="gif-wave"></image>
+			</view>
 		<scroll-view :scroll-y="modalName==null" class="page" :class="modalName!=null?'show':''">
 		
 			<view class="cu-bar bg-white solid-bottom margin-top">
@@ -176,7 +186,7 @@
 					this.modalName = null
 				}
 				this.listTouchDirection = null
-			}
+			},
 		}
 	}
 </script>
@@ -190,6 +200,50 @@
 	.page.show {
 		overflow: hidden;
 	}
-
+	.UCenter-bg {
+		  background-image: url(https://image.weilanwl.com/color2.0/index.jpg);
+		  background-size: cover;
+		  height: 400upx;
+		  display: flex;
+		  justify-content: center;
+		  padding-top: 30upx;
+		  overflow: hidden;
+		  position: relative;
+		  flex-direction: column;
+		  align-items: center;
+		  color: #fff;
+		  font-weight: 300;
+		  text-shadow: 0 0 3px rgba(0, 0, 0, 0.3);
+		}
+	
+	.UCenter-bg text {
+	  opacity: 0.8;
+	}
+	
+	.UCenter-bg image {
+	  width: 200upx;
+	  height: 200upx;
+	}
+	
+	.UCenter-bg .gif-wave{
+	  position: absolute;
+	  width: 100%;
+	  bottom: 0;
+	  left: 0;
+	  z-index: 99;
+	  mix-blend-mode: screen;  
+	  height: 100upx;   
+	}
+	.mapBox{
+	  left: 0;
+	  z-index: 99;
+	  mix-blend-mode: screen;  
+	  height: 100upx;   
+	}
+	
+	.mapBox{
+	  width: 750upx;
+	  height: 300upx;
+	}
 	
 </style>
