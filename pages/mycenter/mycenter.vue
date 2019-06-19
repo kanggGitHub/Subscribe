@@ -113,7 +113,13 @@
 					</navigator>
 				</view>
 				<view class="cu-item" :class="menuArrow?'arrow':''">
-					<navigator class="content" hover-class="none" url="../mycenter/clockin" >
+					<navigator class="content" hover-class="none" url="../mycenter/aboutus" >
+						<image src="/static/center/aboutus_ct.png"  class="png" mode="aspectFit"></image>
+						<text class="text-grey" >更新日志</text>
+					</navigator>
+				</view>
+				<view class="cu-item" :class="menuArrow?'arrow':''">
+					<navigator class="content" hover-class="none" url="../mycenter/aboutus" >
 						<image src="/static/center/aboutus_ct.png"  class="png" mode="aspectFit"></image>
 						<text class="text-grey" >关于我们</text>
 					</navigator>
