@@ -32,6 +32,14 @@
 		    "path" : "pages/mycenter/aboutus",
 		    "style" : {}
 		}
+        ,{
+            "path" : "pages/mycenter/log",
+            "style" : {}
+        }
+        ,{
+            "path" : "pages/mycenter/albumlist",
+            "style" : {}
+        }
     ],
 	// "globalStyle": {
 	// 	"navigationBarTextStyle": "black",
