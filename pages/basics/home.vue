@@ -3,7 +3,7 @@
 		<!-- 轮播图 -->
 		<scroll-view scroll-y class="page">
 			<swiper class="card-swiper" :class="dotStyle?'square-dot':'round-dot'" :indicator-dots="true" :circular="true"
-			 :autoplay="true" interval="2000" duration="500" @change="cardSwiper" indicator-color="#8799a3"
+			 :autoplay="true" interval="2000" duration="1000" @change="cardSwiper" indicator-color="#8799a3"
 			 indicator-active-color="#0081ff">
 				<swiper-item v-for="(item,index) in swiperList" :key="index" :class="cardCur==index?'cur':''">
 					<view class="swiper-item">

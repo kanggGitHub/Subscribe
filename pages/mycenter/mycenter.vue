@@ -73,6 +73,12 @@
 					</navigator>
 				</view>
 				<view class="cu-item" :class="menuArrow?'arrow':''">
+					<navigator class="content" hover-class="none" url="../mycenter/albumlist" >
+						<image src="/static/center/photosys_ct.png"  class="png" mode="aspectFit"></image>
+						<text class="text-grey" >相册管理</text>
+					</navigator>
+				</view>
+				<view class="cu-item" :class="menuArrow?'arrow':''">
 					
 					<navigator class="content" hover-class="none" url="../mycenter/clockin" >
 						<image src="/static/center/upload_ct.png"  class="png" mode="aspectFit"></image>
@@ -113,8 +119,8 @@
 					</navigator>
 				</view>
 				<view class="cu-item" :class="menuArrow?'arrow':''">
-					<navigator class="content" hover-class="none" url="../mycenter/aboutus" >
-						<image src="/static/center/aboutus_ct.png"  class="png" mode="aspectFit"></image>
+					<navigator class="content" hover-class="none" url="../mycenter/log" >
+						<image src="/static/center/updatelog_ct.png"  class="png" mode="aspectFit"></image>
 						<text class="text-grey" >更新日志</text>
 					</navigator>
 				</view>

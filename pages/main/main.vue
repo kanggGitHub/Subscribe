@@ -45,7 +45,6 @@
 		},
 		methods: {
 			NavChange: function(e) {
-				console.log(e.currentTarget.dataset.cur)
 				this.PageCur = e.currentTarget.dataset.cur
 			}
 		}
