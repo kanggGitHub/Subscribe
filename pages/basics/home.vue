@@ -28,6 +28,14 @@
 					<view class="nav-title">{{item.title}}</view>
 					<view class="nav-name">{{item.name}}</view>
 					<text :class="'cuIcon-' + item.cuIcon"></text>
+					<view class="grid col-2">
+						<view class="margin-tb-sm text-center">
+							<button class="cu-btn round bg-red">修改</button>
+						</view>
+						<view class="margin-tb-sm text-center" >
+							<button class="cu-btn round bg-orange" >删除</button>
+						</view>
+					</view>
 				</navigator>
 			</view>
 			<view v-else-if="showtap==2">
@@ -128,6 +136,21 @@
 									cuIcon:this.addphoto.cuIcon})
 				this.modalName=null
 				this.showtap=1
+				uni.request({
+					url: 'http://localhost:8088/photo/savePhotoList', //请求后台接口返回数据。
+					method:'POST',
+					data:this.addphoto,
+					header:{
+						'content-type':'application/json'
+					},
+					dataType:"json",
+					success: (res) => {
+						console.log(this.addphoto);
+					},
+					fail() {
+						this.showtap=2
+					}
+				});
 				uni.showToast({
 					title:"创建成功"
 				})
@@ -136,24 +159,24 @@
 			getPhotos(){
 				let that = this
 				that.showtap=2
-				// uni.request({
-				// 	url: 'http://localhost:8088/photo/getPhotoList', //请求后台接口返回数据。
-				// 	method:'GET',
-				// 	header: {
-				// 		'content-type': 'application/json' //自定义请求头信息
-				// 	},
-				// 	success: (res) => {
-				// 		if(res.data!=null&&res.data.length>0){
-				// 			that.elements = res.data
-				// 			that.showtap=1
-				// 		}else{
-				// 			that.showtap=2
-				// 		}
-				// 	},
-				// 	fail() {
-				// 		that.showtap=2
-				// 	}
-				// });
+				uni.request({
+					url: 'http://localhost:8088/photo/getPhotoList', //请求后台接口返回数据。
+					method:'GET',
+					header: {
+						'content-type': 'application/json' //自定义请求头信息
+					},
+					success: (res) => {
+						if(res.data!=null&&res.data.length>0){
+							that.elements = res.data
+							that.showtap=1
+						}else{
+							that.showtap=2
+						}
+					},
+					fail() {
+						that.showtap=2
+					}
+				});
 			},
 			
 			//初始化轮播图
@@ -195,4 +218,8 @@
 	.page {
 		height: 100vh;
 	}
+	.margin-tb-sm {
+    margin-top: 7px;
+    margin-bottom: -8px;
+}
 </style>
