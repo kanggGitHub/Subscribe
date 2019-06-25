@@ -30,10 +30,10 @@
 					<text :class="'cuIcon-' + item.cuIcon"></text>
 					<view class="grid col-2">
 						<view class="margin-tb-sm text-center">
-							<button class="cu-btn round bg-red">修改</button>
+							<button class="cu-btn round bg-olive shadow" @click.stop="modPhoto()">修改</button>
 						</view>
 						<view class="margin-tb-sm text-center" >
-							<button class="cu-btn round bg-orange" >删除</button>
+							<button class="cu-btn round bg-olive shadow" @click.stop="delPhoto()" >删除</button>
 						</view>
 					</view>
 				</navigator>
@@ -49,21 +49,52 @@
 			<!-- 新建 -->
 			<view class="cu-modal" :class="modalName=='menuModal'?'show':''" @tap="hideModal">
 				<view class="cu-dialog" @tap.stop>
-					<form>
-						<view class="cu-form-group margin-top">
-							<view class="title">名称</view>
-							<input placeholder="例如:我的相册"  v-model="addphoto.title" name="input"></input>
+					<view class="cu-card dynamic">
+						<view class="cu-item shadow">
+							<view class="cu-list menu-avatar">
+								<view class="cu-item text-center">
+									<view class="cu-avatar round lg" style="background-image:url(https://ossweb-img.qq.com/images/lol/web201310/skin/big10006.jpg);"></view>
+									<view class="content flex-treble">
+										<view>创建相册</view>
+									</view>
+								</view>
+							</view>
+							<view class="cu-list menu-avatar comment solids-top">
+								<form>
+									<view class="cu-form-group margin-top">
+										<view class="title">名称</view>
+										<input placeholder="例如:我的相册"  v-model="addphoto.title" name="input"></input>
+									</view>
+									<view class="cu-form-group">
+										<view class="title">名称</view>
+										<input placeholder="例如:MyPhoto" v-model="addphoto.name" name="input"></input>
+									</view>
+									<view class="cu-bar bg-white solid-bottom">
+										<view class="action">
+											<text class="cuIcon-titles text-orange "></text> 相册颜色
+										</view>
+									</view>
+									<view class="cu-form-group margin-top col-5">
+											<radio-group class="block" @change="RadioChange">
+												<radio class='red  margin-left-sm'   style="border:3upx solid #ff001f;border-radius:50%" :class="[radio=='red'?'':'radio',radio=='red'?'checked':'']" :checked="radio=='red'?true:false" value="red"></radio>
+												<radio class='yellow margin-left-sm' style="border:3upx solid yellow;border-radius:50%" :class="[radio=='yellow'?'':'radio',radio=='yellow'?'checked':'']" :checked="radio=='yellow'?true:false" value="yellow"></radio>
+												<radio class='orange margin-left-sm' style="border:3upx solid orange;border-radius:50%" :class="radio=='orange'?'checked':''" :checked="radio=='orange'?true:false" value="orange"></radio>
+												<radio class='green  margin-left-sm' style="border:3upx solid green;border-radius:50%" :class="radio=='green'?'checked':''" :checked="radio=='green'?true:false" value="green"></radio>
+												<radio class='cyan margin-left-sm'   style="border:3upx solid cyan;border-radius:50%" :class="radio=='cyan'?'checked':''" :checked="radio=='cyan'?true:false" value="cyan"></radio>
+												<radio class='purple margin-left-sm' style="border:3upx solid purple;border-radius:50%" :class="radio=='purple'?'checked':''" :checked="radio=='purple'?true:false" value="purple"></radio>
+												<radio class='mauve  margin-left-sm' style="border:3upx solid #9c26b0;border-radius:50%" :class="radio=='mauve'?'checked':''" :checked="radio=='mauve'?true:false" value="mauve"></radio>
+												<radio class='pink margin-left-sm'   style="border:3upx solid pink;border-radius:50%" :class="radio=='pink'?'checked':''" :checked="radio=='pink'?true:false" value="pink"></radio>
+												<radio class='brown margin-left-sm'  style="border:3upx solid brown;border-radius:50%" :class="radio=='brown'?'checked':''" :checked="radio=='brown'?true:false" value="brown"></radio>
+												<radio class='grey  margin-left-sm'  style="border:3upx solid grey;border-radius:50%" :class="radio=='grey'?'checked':''" :checked="radio=='grey'?true:false" value="grey"></radio>
+												<radio class='gray margin-left-sm'   style="border:3upx solid gray;border-radius:50%" :class="radio=='gray'?'checked':''" :checked="radio=='gray'?true:false" value="gray"></radio>
+												<radio class='black margin-left-sm'  style="border:3upx solid black;border-radius:50%" :class="radio=='black'?'checked':''" :checked="radio=='black'?true:false" value="black"></radio>
+											</radio-group>
+									</view>
+									<button class="cu-btn bg-cyan " @click="addPhoto()">创建相册</button>
+								</form>
+							</view>
 						</view>
-						<view class="cu-form-group">
-							<view class="title">名称</view>
-							<input placeholder="例如:MyPhoto" v-model="addphoto.name" name="input"></input>
-						</view>
-						<view class="cu-form-group margin-top">
-							<view class="title">颜色</view>
-							<input placeholder="例如:red,默认青蓝色" v-model="addphoto.color" name="input"></input>
-						</view>
-						<button class="cu-btn bg-cyan " @click="addPhoto()">创建相册</button>
-					</form>
+					</view>
 				</view>
 			</view>
 		</scroll-view>
@@ -81,6 +112,7 @@
 				dotStyle:true,
 				modalName: null,
 				swiperList: [],
+				radio: 'red',
 				elements: [
 					// {
 					// 	title: '布局',
@@ -210,6 +242,15 @@
 			hideModal(e) {
 				this.modalName = null
 			},
+			delPhoto() {
+				console.log(1111)
+			},
+			modPhoto() {
+				console.log(2222)
+			},
+			RadioChange(e) {
+				this.radio = e.detail.value
+			},
 		}
 	}
 </script>
@@ -219,7 +260,7 @@
 		height: 100vh;
 	}
 	.margin-tb-sm {
-    margin-top: 7px;
-    margin-bottom: -8px;
-}
+		margin-top: 7px;
+		margin-bottom: -8px;
+	}
 </style>
