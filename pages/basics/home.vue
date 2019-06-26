@@ -1,7 +1,7 @@
 <template name="basics">
 	<view>
 		<!-- 轮播图 -->
-			<dragball  x='280' y='600' title=""></dragball>
+			<dragball  x='311' y='180'  title="卐" @click="modPhoto()"></dragball>
 			<swiper class="card-swiper" :class="dotStyle?'square-dot':'round-dot'" :indicator-dots="true" :circular="true"
 			 :autoplay="true" interval="2000" duration="1000" @change="cardSwiper" indicator-color="#8799a3"
 			 indicator-active-color="#0081ff">
@@ -102,7 +102,7 @@
 
 <script>
 	import swiperjson from "../../static/datajson/swiperJson.json"
-	import dragball from "../../components/drag-ball/drag_ball.vue"
+	import dragball from "../../components/drag_ball/drag_ball.vue"
 	export default {
 		name: "basics",
 		components: {
@@ -255,6 +255,9 @@
 				this.radio = e.detail.value
 				this.addphoto.color = e.detail.value
 			},
+			ssss() {
+					console.log(111)
+			}
 		}
 	}
 </script>
